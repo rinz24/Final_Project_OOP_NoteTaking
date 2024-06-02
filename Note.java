@@ -13,8 +13,11 @@ import java.time.format.DateTimeFormatter;
  * Provides functionality to save the note to a file.
  */
 public class Note {
+    // The title of the note
     private String title;
+    // The content of the note
     private String content;
+    // The creation timestamp of the note
     private LocalDateTime creationTime;
 
     /**
