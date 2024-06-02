@@ -9,11 +9,14 @@ import java.util.List;
  * Provides functionality to create a folder and manage notes within it.
  */
 public class Folder {
+    // The name of the folder
     private String name;
+    // A list to store the notes in the folder
     private List<Note> notes;
 
     /**
      * Constructs a Folder with the specified name.
+     * Initializes the notes list and creates the folder in the file system.
      * @param name the name of the folder
      */
     public Folder(String name) {
@@ -23,7 +26,7 @@ public class Folder {
     }
 
     /**
-     * Creates a folder in the file system.
+     * Creates a folder in the file system if it does not already exist.
      */
     private void createFolder() {
         File folder = new File(name);
