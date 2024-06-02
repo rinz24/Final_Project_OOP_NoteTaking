@@ -12,10 +12,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ToDoListApp {
+    // Main application frame
     private JFrame frame;
+    // Panel to hold the list of to-do items
     private JPanel todoItemsPanel;
+    // List to store to-do items
     private ArrayList<TodoItem> todoItems;
 
+    /**
+     * Constructs the ToDoListApp and initializes the UI.
+     */
     public ToDoListApp() {
         todoItems = new ArrayList<>();
         frame = new JFrame("To-Do List");
@@ -24,10 +30,13 @@ public class ToDoListApp {
         initialize();
     }
 
+    /**
+     * Initializes the main UI components.
+     */
     private void initialize() {
         JPanel panel = new JPanel(new BorderLayout());
 
-        // To-do list panel
+        // Panel for the to-do list
         JPanel todoPanel = new JPanel(new BorderLayout());
         todoPanel.setBorder(BorderFactory.createTitledBorder("To-Do List"));
         todoItemsPanel = new JPanel(new GridLayout(0, 1));
@@ -42,11 +51,17 @@ public class ToDoListApp {
         frame.setVisible(true);
     }
 
+    /**
+     * Listener class for the Add Todo button.
+     */
     private class AddTodoListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            // Text field for to-do item
             JTextField todoField = new JTextField(20);
+            // Text field for due date
             JTextField dateField = new JTextField(10);
+            // Restrict input to digits, backspace, delete, and forward slash
             dateField.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent e) {
@@ -56,6 +71,7 @@ public class ToDoListApp {
                     }
                 }
             });
+            // Button to delete the to-do item
             JButton deleteButton = new JButton("Delete");
             TodoItem todoItem = new TodoItem(todoField, dateField);
             deleteButton.addActionListener(ev -> {
@@ -74,7 +90,11 @@ public class ToDoListApp {
         }
     }
 
+    /**
+     * Sorts the to-do items by date and updates the UI.
+     */
     private void sortTodoItems() {
+        // Sort items by date
         todoItems.sort((item1, item2) -> {
             Date date1 = parseDate(item1.getDateField().getText());
             Date date2 = parseDate(item2.getDateField().getText());
@@ -83,6 +103,7 @@ public class ToDoListApp {
             return date1.compareTo(date2);
         });
 
+        // Update UI with sorted items
         todoItemsPanel.removeAll();
         for (TodoItem item : todoItems) {
             JPanel todoItemPanel = new JPanel(new FlowLayout());
@@ -104,6 +125,11 @@ public class ToDoListApp {
         frame.repaint();
     }
 
+    /**
+     * Parses a date string in MM/dd/yyyy format.
+     * @param dateStr the date string to parse
+     * @return the parsed Date object, or null if parsing fails
+     */
     private Date parseDate(String dateStr) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
@@ -113,11 +139,22 @@ public class ToDoListApp {
         }
     }
 
+    /**
+     * Class to represent a to-do item.
+     */
     private class TodoItem {
+        // Check box for marking the item as complete
         private JCheckBox checkBox;
+        // Text field for the to-do item description
         private JTextField todoField;
+        // Text field for the due date
         private JTextField dateField;
 
+        /**
+         * Constructs a TodoItem with the specified fields.
+         * @param todoField the text field for the to-do item
+         * @param dateField the text field for the due date
+         */
         public TodoItem(JTextField todoField, JTextField dateField) {
             this.checkBox = new JCheckBox();
             this.todoField = todoField;
@@ -137,6 +174,10 @@ public class ToDoListApp {
         }
     }
 
+    /**
+     * Main method to run the application.
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ToDoListApp::new);
     }
