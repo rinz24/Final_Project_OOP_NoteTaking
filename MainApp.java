@@ -20,9 +20,8 @@ import java.util.Date;  // For handling dates
 import java.util.Properties;  // For storing and retrieving properties
 import javax.imageio.ImageIO;  // For reading and writing images
 
-public class MainApp {
+public class MainApp extends Window {
     public static final JTextComponent TitleField = null;  // Unused static field, can be removed
-    private JFrame frame;  // Main application window
     private JTextField noteTitleField;  // Text field for note title
     private JTextArea noteContentArea;  // Text area for note content
     private JComboBox<String> folderComboBox;  // Dropdown for selecting folders
@@ -33,17 +32,14 @@ public class MainApp {
     private Highlighter highlighter;  // Highlighter for text area
 
     public MainApp() {
+        super(900,700);
         folders = new ArrayList<>();  // Initialize folder list
-        frame = new JFrame("Note Taking App");  // Create main window
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Set close operation
-        frame.setSize(900, 700);  // Set window size
-        initialize();  // Initialize UI components
     }
 
     /**
      * Initializes the main UI components.
      */
-    private void initialize() {
+    void initialize() {
         JPanel panel = new JPanel();  // Main panel
         panel.setLayout(new BorderLayout());  // Set layout manager
 
