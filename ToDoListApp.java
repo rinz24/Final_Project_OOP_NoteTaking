@@ -11,9 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ToDoListApp {
-    // Main application frame
-    private JFrame frame;
+public class ToDoListApp extends Window{
     // Panel to hold the list of to-do items
     private JPanel todoItemsPanel;
     // List to store to-do items
@@ -23,17 +21,14 @@ public class ToDoListApp {
      * Constructs the ToDoListApp and initializes the UI.
      */
     public ToDoListApp() {
+        super(600,400);
         todoItems = new ArrayList<>();
-        frame = new JFrame("To-Do List");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
-        initialize();
     }
 
     /**
      * Initializes the main UI components.
      */
-    private void initialize() {
+    void initialize() {
         JPanel panel = new JPanel(new BorderLayout());
 
         // Panel for the to-do list
